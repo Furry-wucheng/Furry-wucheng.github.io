@@ -33,8 +33,8 @@
         <hr>
     </div>
     <div class="post-content">
-        <h2 id="hexo的安装"><a href="#hexo的安装" class="headerlink" title="hexo的安装"></a>hexo的安装</h2><h4 id="（在此之前请先安装node-js"><a href="#（在此之前请先安装node-js" class="headerlink" title="（在此之前请先安装node.js"></a>（在此之前请先安装node.js</h4><hr>
-<p>安装hexo命令:</p>
+        <h1 id="hexo的安装"><a href="#hexo的安装" class="headerlink" title="hexo的安装"></a>hexo的安装</h1><h4 id="（在此之前请先安装node-js和git"><a href="#（在此之前请先安装node-js和git" class="headerlink" title="（在此之前请先安装node.js和git"></a>（在此之前请先安装node.js和git</h4><hr>
+<p>安装好git后在要存放blog的地方右击，选择Git Bash Here<br>安装hexo命令:</p>
 <blockquote>
 <p>npm install -g hexo-cli</p>
 </blockquote>
@@ -42,13 +42,7 @@
 <blockquote>
 <p>hexo init<br>npm install  </p>
 </blockquote>
-<p>即可新建好文件夹</p>
-<p>注：如果要在GitHub上搭建博客，在_config.yml的最后的</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git </span><br><span class="line">    repo: 你的blog地址 </span><br><span class="line">    branch: main</span><br><span class="line">    message: 提交信息</span><br></pre></td></tr></table></figure>
-
-<p>以及blog的标题等信息也会在_config.yml中，请记得修改配置</p>
-<p>有关更多配置参考官方文档 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">https://hexo.io/zh-cn/docs/configuration</a></p>
-<p>在新建的文件中</p>
+<p>即可新建好文件夹<br>在新建的文件中</p>
 <blockquote>
 <p>hexo init</p>
 </blockquote>
@@ -57,24 +51,42 @@
 <blockquote>
 <p>hexo new “title”  </p>
 </blockquote>
-<p>来新建文章了，文章将会存放在public文件夹中</p>
-<p>由于hexo是静态网站，新建好文章后记得用</p>
+<p>然后在<code>source\_posts</code>里能看到新建的文章了，语法为markdown 有关请访问<a target="_blank" rel="noopener" href="https://markdown.com.cn/basic-syntax/">markdown官方教程</a></p>
+<p>由于hexo是静态的，新建好文章后记得用</p>
 <blockquote>
 <p>hexo g  </p>
 </blockquote>
 <p>生成页面</p>
-<p>测试可用</p>
+<p>然后本地预览测试</p>
 <blockquote>
 <p>hexo s  </p>
 </blockquote>
-<p>打开服务，并可以在游览器中输入localhost:4000中查看博客是否有问题</p>
-<p>写好需要部署到GitHub或者服务器中</p>
+<p>打开服务，并可以在游览器中输入<code>localhost:4000</code>中查看博客是否有问题</p>
+<h1 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h1><p>在GitHub上建好仓库后</p>
+<p>安装插件<code>npm install hexo-deployer-git --save</code></p>
+<p>在上传之前之前请先配置好_config.yml的最后的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">    type: git </span><br><span class="line">    repo: 你的GitHub仓库地址 </span><br><span class="line">    branch: main</span><br><span class="line">    message: 提交信息</span><br></pre></td></tr></table></figure>
+
+<p>blog的标题等信息也会在_config.yml中，请记得修改配置</p>
+<p>有关更多配置参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方文档</a></p>
+<p>写好需要部署到GitHub或者服务器中使用命令</p>
 <blockquote>
 <p>hexo d</p>
 </blockquote>
 <p>若配置不对请检查一遍配置再进行上传</p>
+<p>有关文章界面请访问 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing">https://hexo.io/zh-cn/docs/writing</a></p>
+<p>上传好后就可以在<code>你的用户名.github.io</code>看到你的blog了</p>
+<p>如果你有自己的域名的话，在域名的控制台中添加解析记录类型为A，地址需要在cmd命令中<code>ping 你的用户名.github.io</code></p>
+<p>然后再GitHub仓库中 Setting-Page-Custom domain 中填入你的域名</p>
+<p>至此差不多就完成了blog的搭建<br>觉得主题难看可以去下载<a target="_blank" rel="noopener" href="https://hexo.io/themes/">官网的主题</a>安装</p>
 <p>写在后面：<br>在利用github搭建hexo的过程中也遇到一些问题  </p>
-<p>例如：hexo d后GitHub中的自定义域名会被修改<br>解决：在hexo生成博客的source目录中新建CNAME文件，在文件中输入域名，以防custom domain被重置</p>
+<p>如:</p>
+<ul>
+<li><p>hexo d后GitHub中的自定义域名会被修改<br>在hexo生成博客的source目录中新建CNAME文件，在文件中输入域名，以防custom domain被重置</p>
+</li>
+<li><p>github的页面和预览的不一样<br><code>hexo clean</code>后再次生成界面上传，耐心等待一会就好了</p>
+</li>
+</ul>
 
     </div>
 
