@@ -219,58 +219,26 @@
 <pre><code>hexo new page links
 </code></pre>
 <p>然后在<code>source</code>文件夹里新建一个<code>_data</code>文件夹，再创建一个<code>links.yml</code>文件，编辑文件添加友链<br>友链格式如下：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">- name: 戊成
-  #博客名
-  link: https:&#x2F;&#x2F;www.wucheng.work&#x2F;
-  #博客地址
-  description: 怀念过去，珍惜现在，着手未来
-  #描述
-  avatar: http:&#x2F;&#x2F;q1.qlogo.cn&#x2F;g?b&#x3D;qq&amp;nk&#x3D;3241748701&amp;s&#x3D;640
-  #头像地址（有些主题没有头像的）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">戊成</span></span><br><span class="line">  <span class="comment">#博客名</span></span><br><span class="line">  <span class="attr">link:</span> <span class="string">https://www.wucheng.work/</span></span><br><span class="line">  <span class="comment">#博客地址</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">怀念过去，珍惜现在，着手未来</span></span><br><span class="line">  <span class="comment">#描述</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">http://q1.qlogo.cn/g?b=qq&amp;nk=3241748701&amp;s=640</span></span><br><span class="line">  <span class="comment">#头像地址（有些主题没有头像的）</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>创建文件夹  </p>
 <pre><code>hexo new page categories
 </code></pre>
 <p>修改<code>categories</code>文件内的<code>index.md</code>文件<br>在<code>date</code>下添加<code>type: &quot;catefories&quot;</code><br>效果如下：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
-title: 文章分类
-date: 2021-11-19 22:29:40
-type: &quot;categories&quot;
----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">文章分类</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2021-11-19 22:29:40</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;categories&quot;</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 
 <p>然后在要分类的文章中添加<code>categories</code>属性并归到你想要的分类中<br>效果如下：</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
-title: Hexo部署plus
-date: 2021-11-19 20:30:54
-categories:
-- hexo
----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hexo部署plus</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2021-11-19 20:30:54</span></span><br><span class="line"><span class="attr">categories:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><pre><code>hexo new page tags
 </code></pre>
 <p>方法与创建分类相似，在<code>tags</code>文件夹中的<code>index.md</code>中添加</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
-title: 标签
-date: 2021-11-19 22:29:40
-type: &quot;tags&quot;
----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">标签</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2021-11-19 22:29:40</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">&quot;tags&quot;</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 
 <p>然后在需要添加标签的文章中</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
-title: Hexo部署plus
-date: 2021-11-19 20:30:54
-tags: 
-- hexo
----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Hexo部署plus</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2021-11-19 20:30:54</span></span><br><span class="line"><span class="attr">tags:</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">hexo</span></span><br><span class="line"><span class="meta">---</span></span><br></pre></td></tr></table></figure>
 <h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>不要忘记了，要在主题配置文件<code>_config.yml</code>中添加上这些界面</p>
-<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">#仅给出自己的配置文件供参考，请根据情况自行修改
-menu:
-  主页: &#x2F;
-  归档: &#x2F;archives
-  分类: &#x2F;categories
-  标签: &#x2F;tags
-  友链: &#x2F;links
-  关于我: &#x2F;about<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#仅给出自己的配置文件供参考，请根据情况自行修改</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="string">主页:</span> <span class="string">/</span></span><br><span class="line">  <span class="string">归档:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="string">分类:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="string">标签:</span> <span class="string">/tags</span></span><br><span class="line">  <span class="string">友链:</span> <span class="string">/links</span></span><br><span class="line">  <span class="string">关于我:</span> <span class="string">/about</span></span><br></pre></td></tr></table></figure>
 
 <p>未完待续…… </p>
 
