@@ -175,7 +175,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-11-09 20:30:54
+        <i class="fas fa-edit"></i>&nbsp;2021-11-19 20:30:54
     </span>
     
     
@@ -203,7 +203,7 @@
         
 
         <div class="article-content markdown-body">
-            <p>前面的完成了基本的hexo的搭建，但是要自己的博客更实用/好看一点仅仅前边所说的是不够的，因此在这里加了一点拓展。<br>ps：由于人比较懒，不会一次性写完，现留着坑慢慢写</p>
+            <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>前面的完成了基本的hexo的搭建，但是要自己的博客更实用/好看一点仅仅前边所说的是不够的，因此在这里加了一点拓展。<br>ps：由于人比较懒，不会一次性写完，现留着坑慢慢写</p>
 <h1 id="Hexo的主题"><a href="#Hexo的主题" class="headerlink" title="Hexo的主题"></a>Hexo的主题</h1><p>那么，有了一个博客，当然好看的<del>皮肤</del>主题是不能少的，所以我们要去<a class="link"   target="_blank" rel="noopener" href="https://hexo.io/themes/" >官网上发布的主题<i class="fas fa-external-link-alt"></i></a>去找一个符合心意的主题。<br>ps：我用的主题是来自<a class="link"   target="_blank" rel="noopener" href="https://github.com/XPoet/hexo-theme-keep" >@XPoet的keep主题<i class="fas fa-external-link-alt"></i></a></p>
 <p>在GitHub下载好主题的安装包后，解压安装包到你的blog文件夹中的themes中，并且修改根目录中<code>_config.yml</code>中的<code>themes</code>项，改成你放在themes文件夹中的文件名  </p>
 <p>假如你解压放在themes文件夹的名字为keep则找到该项并修改为:</p>
@@ -211,7 +211,68 @@
 </code></pre>
 <p>并再次<code>hexo g</code>后<code>hexo s</code>就能在本地看到新<del>皮肤</del>主题了<br>当然别忘了根据注释或者文档修改一下主题内部的<code>_config.yml</code>文件（一般打开会有注释，或者在里面有作者贴的文档链接）</p>
 <p>最后<code>hexo d</code>上传到blog，过几分钟刷新一下网页就能看到了。</p>
-<p>未完待续（宿舍断电了，不写了  </p>
+<h1 id="关于我-友链-分类等界面"><a href="#关于我-友链-分类等界面" class="headerlink" title="关于我/友链/分类等界面"></a>关于我/友链/分类等界面</h1><h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>使用命令</p>
+<pre><code>hexo new page about
+</code></pre>
+<p>就能在<code>source</code>内生成一个文件夹，里面有一个<code>index.md</code>，在界面添加自己想要的东西就好了。<br>然后修改主题的<code>_config.yml</code>文件，就可以开启新界面了。</p>
+<h2 id="友链（不知道其他主题怎么样，仅以我目前使用的主题为准）"><a href="#友链（不知道其他主题怎么样，仅以我目前使用的主题为准）" class="headerlink" title="友链（不知道其他主题怎么样，仅以我目前使用的主题为准）"></a>友链（不知道其他主题怎么样，仅以我目前使用的主题为准）</h2><p>命令：</p>
+<pre><code>hexo new page links
+</code></pre>
+<p>然后在<code>source</code>文件夹里新建一个<code>_data</code>文件夹，再创建一个<code>links.yml</code>文件，编辑文件添加友链<br>友链格式如下：</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">- name: 戊成
+  #博客名
+  link: https:&#x2F;&#x2F;www.wucheng.work&#x2F;
+  #博客地址
+  description: 怀念过去，珍惜现在，着手未来
+  #描述
+  avatar: http:&#x2F;&#x2F;q1.qlogo.cn&#x2F;g?b&#x3D;qq&amp;nk&#x3D;3241748701&amp;s&#x3D;640
+  #头像地址（有些主题没有头像的）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><p>创建文件夹  </p>
+<pre><code>hexo new page categories
+</code></pre>
+<p>修改<code>categories</code>文件内的<code>index.md</code>文件<br>在<code>date</code>下添加<code>type: &quot;catefories&quot;</code><br>效果如下：</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
+title: 文章分类
+date: 2021-11-19 22:29:40
+type: &quot;categories&quot;
+---<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后在要分类的文章中添加<code>categories</code>属性并归到你想要的分类中<br>效果如下：</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
+title: Hexo部署plus
+date: 2021-11-19 20:30:54
+categories:
+- hexo
+---<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><pre><code>hexo new page tags
+</code></pre>
+<p>方法与创建分类相似，在<code>tags</code>文件夹中的<code>index.md</code>中添加</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
+title: 标签
+date: 2021-11-19 22:29:40
+type: &quot;tags&quot;
+---<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>然后在需要添加标签的文章中</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">---
+title: Hexo部署plus
+date: 2021-11-19 20:30:54
+tags: 
+- hexo
+---<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>不要忘记了，要在主题配置文件<code>_config.yml</code>中添加上这些界面</p>
+<pre class="line-numbers language-yml" data-language="yml"><code class="language-yml">#仅给出自己的配置文件供参考，请根据情况自行修改
+menu:
+  主页: &#x2F;
+  归档: &#x2F;archives
+  分类: &#x2F;categories
+  标签: &#x2F;tags
+  友链: &#x2F;links
+  关于我: &#x2F;about<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>未完待续…… </p>
 
         </div>
 
@@ -220,29 +281,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/11/15/C%E8%AF%AD%E8%A8%80%E4%BD%9C%E4%B8%9A/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">C语言作业</span>
-                                <span class="post-nav-item">上一篇</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2021/10/20/hexo%E9%83%A8%E7%BD%B2/"
+                           href="/2021/11/15/C%E8%AF%AD%E8%A8%80%E4%BD%9C%E4%B8%9A/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">Hexo的部署</span>
+                                <span class="post-nav-title-item">C语言作业</span>
                                 <span class="post-nav-item">下一篇</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -353,7 +399,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="nav-text">Hexo的主题</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E7%9A%84%E4%B8%BB%E9%A2%98"><span class="nav-text">Hexo的主题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%88%91-%E5%8F%8B%E9%93%BE-%E5%88%86%E7%B1%BB%E7%AD%89%E7%95%8C%E9%9D%A2"><span class="nav-text">关于我&#x2F;友链&#x2F;分类等界面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%88%91"><span class="nav-text">关于我</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8B%E9%93%BE%EF%BC%88%E4%B8%8D%E7%9F%A5%E9%81%93%E5%85%B6%E4%BB%96%E4%B8%BB%E9%A2%98%E6%80%8E%E4%B9%88%E6%A0%B7%EF%BC%8C%E4%BB%85%E4%BB%A5%E6%88%91%E7%9B%AE%E5%89%8D%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%BB%E9%A2%98%E4%B8%BA%E5%87%86%EF%BC%89"><span class="nav-text">友链（不知道其他主题怎么样，仅以我目前使用的主题为准）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%B1%BB"><span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE"><span class="nav-text">标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-text">最后</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
