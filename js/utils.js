@@ -242,7 +242,10 @@ KEEP.initUtils = () => {
     },
 
     getHowLongAgo(timestamp) {
-      const l = KEEP.language_ago;
+
+      let l = KEEP.language_ago;
+
+      timestamp /= 1000;
 
       const __Y = Math.floor(timestamp / (60 * 60 * 24 * 30) / 12);
       const __M = Math.floor(timestamp / (60 * 60 * 24 * 30));
@@ -278,10 +281,8 @@ KEEP.initUtils = () => {
     setHowLongAgoInHome() {
       const post = document.querySelectorAll('.home-article-meta-info .home-article-date');
       post && post.forEach(v => {
-        const nowDate = Date.now();
-        const postDate = new Date(v.dataset.date.split(' GMT')[0]).getTime();
-        v.innerHTML = this.getHowLongAgo(Math.floor((nowDate - postDate) / 1000));
-      });
+        v.innerHTML = this.getHowLongAgo(Date.now() - new Date(v.dataset.date).getTime())
+      })
     },
 
     // loading progress bar start
