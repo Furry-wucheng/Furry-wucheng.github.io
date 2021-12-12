@@ -216,11 +216,15 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="Hexo的安装准备"><a href="#Hexo的安装准备" class="headerlink" title="Hexo的安装准备"></a>Hexo的安装准备</h1><p>（在此之前请先安装<a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/downloads" >node.js<i class="fas fa-external-link-alt"></i></a>和<a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/downloads" >git<i class="fas fa-external-link-alt"></i></a>）  </p>
+            <h1 id="Hexo的安装准备"><a href="#Hexo的安装准备" class="headerlink" title="Hexo的安装准备"></a>Hexo的安装准备</h1><p>（在此之前请先安装<a class="link"   target="_blank" rel="noopener" href="http://nodejs.cn/download/" >node.js<i class="fas fa-external-link-alt"></i></a>和<a class="link"   target="_blank" rel="noopener" href="https://git-scm.com/downloads" >git<i class="fas fa-external-link-alt"></i></a>）  </p>
 <p>首先要注册好一个GitHub账号，然后新建一个仓库，起一个名字（最好是你的用户名）<br>然后安装好git后在要存放blog的文件夹中右击，选择Git Bash Here<br>然后将你的GitHub与本地相连接  </p>
 <pre><code>git config --global user.name &quot;你的GitHub用户名&quot;
 git config --global user.email &quot;你的GitHub注册邮箱&quot;
 </code></pre>
+<p>然后</p>
+<blockquote>
+<p>ssh-keygen -t rsa -C “GitHub 邮箱”</p>
+</blockquote>
 <p>一路回车，随后找到生成密钥的地方（一般是<code>C:\用户\电脑账户名\.ssh\</code>)用记事本打开<code>id_rsa.pub</code>文件，复制里面的内容  </p>
 <p>转到GitHub，点击<code>头像- Setting - SSH and GPG keys - New SSH key</code>在大输入框里面粘贴刚刚复制的内容，然后Add SSH key  </p>
 <p>到这里，安装的准备工作就做完了</p>
@@ -230,7 +234,7 @@ git config --global user.email &quot;你的GitHub注册邮箱&quot;
 </blockquote>
 <p>在建立的文件夹中输入命令：</p>
 <blockquote>
-<p>hexo init blog </p>
+<p>hexo init<br>npm install </p>
 </blockquote>
 <p>来新建网站</p>
 <p>然后就可以使用</p>
@@ -265,8 +269,7 @@ git config --global user.email &quot;你的GitHub注册邮箱&quot;
 <p>如果你有自己的域名的话，在域名的控制台中添加解析记录类型为A，地址需要在cmd命令中<code>ping 你的用户名.github.io</code></p>
 <p>然后再GitHub仓库中找到<code>Setting-Page-Custom domain</code>中填入你的域名</p>
 <p>至此差不多就完成了blog的搭建<br>觉得主题难看可以去下载<a class="link"   target="_blank" rel="noopener" href="https://hexo.io/themes/" >官网的主题<i class="fas fa-external-link-alt"></i></a>安装</p>
-<p>写在后面：<br>在利用github搭建hexo的过程中也遇到一些问题  </p>
-<p>如:</p>
+<h1 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h1><p>在利用github搭建hexo的过程中也遇到一些问题  </p>
 <ul>
 <li><p>hexo d后GitHub中的自定义域名会被修改<br>在hexo生成博客的source目录中新建CNAME文件，在文件中输入域名，以防custom domain被重置</p>
 </li>
@@ -399,7 +402,7 @@ git config --global user.email &quot;你的GitHub注册邮箱&quot;
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E7%9A%84%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">Hexo的安装准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">Hexo的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="nav-number">3.</span> <span class="nav-text">部署到GitHub</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E7%9A%84%E5%AE%89%E8%A3%85%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">Hexo的安装准备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">Hexo的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="nav-number">3.</span> <span class="nav-text">部署到GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%90%8E%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">写在后面</span></a></li></ol>
     </div>
 </div>
         </aside>
