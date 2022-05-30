@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="wucheng">
+    
+    <title>
+        
+            FTP服务器 |
+        
+        戊成的BLOG
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/avatar.png">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.png","favicon":"/images/avatar.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.png","description":"怀念过去，珍惜眼前，着手未来"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="logo-title" href="/">
+                戊成的BLOG
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                标签
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/links"
+                            >
+                                友链
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                关于
+                            </a>
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags">标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/links">友链</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about">关于</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">FTP服务器</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/avatar.png">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">wucheng</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;2022-05-31 00:06:51
+    </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Linux/">Linux</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+
+    
+    
+    
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>记录一下搭建FTP服务器踩过的坑</p>
+<h2 id="关于WIN的设置"><a href="#关于WIN的设置" class="headerlink" title="关于WIN的设置"></a>关于WIN的设置</h2><blockquote>
+<p>控制面板——启用或关闭Windows功能——Internet Information Services——FTP服务（勾选）、Web管理工具——IIS管理控制台（勾选）</p>
+<p>以及TFTP客户端一并勾选上</p>
+</blockquote>
+<blockquote>
+<p>控制面板——网络和Internet——Internet选项——高级——使用被动FTP</p>
+</blockquote>
+<blockquote>
+<p>控制面板——系统和安全——Windows Defender防火墙——允许应用通过Windows……——更改设置 勾选FTP服务器</p>
+</blockquote>
+<h2 id="Linux安装配置FTP服务"><a href="#Linux安装配置FTP服务" class="headerlink" title="Linux安装配置FTP服务"></a>Linux安装配置FTP服务</h2><p>使用命令<code>yum install vsftpd</code>安装FTP服务，配置文件在<code>/etc/vsftpd/vsftpd.conf</code>中</p>
+<p>其他文件<code>ftpusers</code>是禁止文登录FTP服务的用户的黑名单（默认开启）</p>
+<p><code>user_list</code>用户可以登录的白名单，黑名单白名单的启用与关闭需要在配置文件中修改</p>
+<h3 id="FTP的常用命令"><a href="#FTP的常用命令" class="headerlink" title="FTP的常用命令"></a>FTP的常用命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">service vsftpd start		开启FTP服务</span><br><span class="line">service vsftpd status		查看状态</span><br><span class="line">service vsftpd stop			停止服务</span><br><span class="line">service vsftpd restart		重启服务</span><br><span class="line">systemctl restart vsftpd	重启服务</span><br><span class="line">chkconfig vsftpd on			开机自启</span><br></pre></td></tr></table></figure>
+
+<p>在配置文件更新后记得要重启一下服务</p>
+<h3 id="vsftpdc-conf的配置"><a href="#vsftpdc-conf的配置" class="headerlink" title="vsftpdc.conf的配置"></a>vsftpdc.conf的配置</h3><p>以下是一些重要的配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">write_enable=YES		允许用户修改文件内容</span><br><span class="line">local_enable=YES		允许本地用户可以登录</span><br><span class="line">anoymous_enable=NO		禁止匿名用户的呢牢固</span><br><span class="line">no_anon_password=YES	匿名用户不需要密码</span><br><span class="line">anon_root=/example/directrory/	匿名登录的目录</span><br><span class="line">local_root=/var/ftp/pub	设置登录后的目录（可自定义）</span><br><span class="line">根目录的限制</span><br><span class="line">chroot_list_enable=YES</span><br><span class="line">chroot_local_user=YES</span><br><span class="line">chroot_list_file=/etc/vsftp/chroot_list	设置此文件中的用户可以切换目录</span><br></pre></td></tr></table></figure>
+
+<p>具体配置（来自<a class="link"   target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1861905" >Linux 在 linux 中搭建 FTP 服务 - 云+社区 - 腾讯云 (tencent.com)<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 禁止匿名用户anonymous登录</span></span><br><span class="line">anonymous_enable=NO</span><br><span class="line"><span class="meta">#</span><span class="bash"> 允许本地用户登录</span></span><br><span class="line">local_enable=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> 让登录的用户有写权限(上传，删除)</span></span><br><span class="line">write_enable=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> 默认<span class="built_in">umask</span></span></span><br><span class="line">local_umask=022</span><br><span class="line"><span class="meta">#</span><span class="bash"> 把传输记录的日志保存到/var/<span class="built_in">log</span>/vsftpd.log</span></span><br><span class="line">xferlog_enable=YES</span><br><span class="line">xferlog_file=/var/log/vsftpd.log</span><br><span class="line">xferlog_std_format=NO</span><br><span class="line"><span class="meta">#</span><span class="bash"> 允许ASCII模式上传</span></span><br><span class="line">ascii_upload_enable=YES </span><br><span class="line"><span class="meta">#</span><span class="bash"> 允许ASCII模式下载</span></span><br><span class="line">ascii_download_enable=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用20号端口传输数据</span></span><br><span class="line">connect_from_port_20=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> 欢迎标语</span></span><br><span class="line">ftpd_banner=Welcome to use my test ftp server.</span><br><span class="line"><span class="meta">#</span><span class="bash"> 接下来的三条配置很重要</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chroot_local_user设置了YES，那么所有的用户默认将被chroot，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 也就用户目录被限制在了自己的home下，无法向上改变目录。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chroot_list_enable设置了YES，即让chroot用户列表有效。</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ★超重要：如果chroot_local_user设置了YES，那么chroot_list_file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置的文件里，是不被chroot的用户(可以向上改变目录)</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ★超重要：如果chroot_local_user设置了NO，那么chroot_list_file</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 设置的文件里，是被chroot的用户(无法向上改变目录)</span></span><br><span class="line">chroot_list_enable=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> touch /etc/vsftpd/chroot_list 新建</span></span><br><span class="line">chroot_list_file=/etc/vsftpd/chroot_list</span><br><span class="line">use_localtime=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> 以standalone模式在ipv4上运行</span></span><br><span class="line">listen=YES</span><br><span class="line"><span class="meta">#</span><span class="bash"> PAM认证服务名，这里默认是vsftpd，在安装vsftpd的时候已经创建了这个pam文件，</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在/etc/pam.d/vsftpd，根据这个pam文件里的设置，/etc/vsftpd/ftpusers</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 文件里的用户将禁止登录ftp服务器，比如root这样敏感的用户，所以你要禁止别的用户</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 登录的时候，也可以把该用户追加到/etc/vsftpd/ftpusers里。</span></span><br><span class="line">pam_service_name=vsftpd</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建FTP用户"><a href="#创建FTP用户" class="headerlink" title="创建FTP用户"></a>创建FTP用户</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd test	创建用户</span><br><span class="line">passwd test		修改密码</span><br><span class="line">chown test:test /你的ftp目录（一般在/var/ftp/pub 自定义另算）</span><br></pre></td></tr></table></figure>
+
+<p>创建用户后就可以使用此用户账号和密码登录到FTP服务了（不建议开匿名登录）</p>
+<p>在文件管理的条中输入<code>ftp://虚拟机的地址</code>就可以直接连接到FTP的根目录文件了（前提是在win的设置第二条中勾选FTP的预览）</p>
+<h2 id="关于一些重要的坑"><a href="#关于一些重要的坑" class="headerlink" title="关于一些重要的坑"></a>关于一些重要的坑</h2><h3 id="1-防火墙"><a href="#1-防火墙" class="headerlink" title="1. 防火墙"></a>1. 防火墙</h3><p>FTP服务连接一定要设置好Linux的防火墙，否则会被拦下，我直接简单粗暴的直接关掉</p>
+<blockquote>
+<p>service firewalld stop(Linux 7)</p>
+<p>service  iptables stop(Linux 6)</p>
+</blockquote>
+<h3 id="2-SELinux"><a href="#2-SELinux" class="headerlink" title="2. SELinux"></a>2. SELinux</h3><p>在关闭防火墙后连接倒是能连上了，但是当我尝试上传文件时……直接弹 SELinux 的警报了，网上有说要 <code>setenforce 0</code>关闭防火墙的，然而我发现关掉防火墙更加连接不上……</p>
+<p>实际上只要关掉SELinux对FTP的保护就好了</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">getsebool -a|grep ftp	找到SELinux关于ftp服务的保护</span><br><span class="line"><span class="meta">#</span><span class="bash"> 这两条一定要开启才能够上传</span></span><br><span class="line">setsebool -P ftpd_full_access 1</span><br><span class="line">setsebool -P ftpd_anon_write 1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 如果找不到的话找相近或者类似看起来像的</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置文件"><a href="#3-配置文件" class="headerlink" title="3. 配置文件"></a>3. 配置文件</h3><p>配置文件有两个小坑，一个是<code>chroot_list</code>，一个是权限的检查问题</p>
+<p>在配置好文件后由于被设置了根目录保护但是有特定用户可以访问其他目录，也就是<code>chroot_local_user=YES</code>后而没有创建白名单文件，这个只需要<code>touch chroot_list</code>就好了</p>
+<p>另一个是因为vsftpd增强了安全检查，如果用户被限定在了主目录下，用户就不能再有写的权限了，如果检查还有写权限则会报错。</p>
+<p>而这个只需要在配置文件中添加<code>allow_writeable_chroot=YES</code>就好了</p>
+
+        </div>
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/05/17/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Java多线程笔记</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+              <span>2021</span>
+              -
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">wucheng</a>
+        </div>
+        
+        <div class="theme-info info-item">
+            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8EWIN%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">关于WIN的设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEFTP%E6%9C%8D%E5%8A%A1"><span class="nav-number">2.</span> <span class="nav-text">Linux安装配置FTP服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">FTP的常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vsftpdc-conf%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">vsftpdc.conf的配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAFTP%E7%94%A8%E6%88%B7"><span class="nav-number">2.3.</span> <span class="nav-text">创建FTP用户</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%80%E4%BA%9B%E9%87%8D%E8%A6%81%E7%9A%84%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">关于一些重要的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">3.1.</span> <span class="nav-text">1. 防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-SELinux"><span class="nav-number">3.2.</span> <span class="nav-text">2. SELinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">3.3.</span> <span class="nav-text">3. 配置文件</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
