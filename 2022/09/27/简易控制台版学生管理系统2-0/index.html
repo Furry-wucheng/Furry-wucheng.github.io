@@ -226,7 +226,7 @@
 <li>写的比较随意，几乎什么章法</li>
 <li>命名过于接近，如果不是自己写的估计别人都能看晕</li>
 <li>程序设计的不够优雅，还是需要学习一下优秀的代码</li>
-<li>没有设计模式方面知识的支撑，整体结构不够明了</li>
+<li>没有分层次，耦合过高</li>
 </ul>
 <h2 id="踩的一些小坑"><a href="#踩的一些小坑" class="headerlink" title="踩的一些小坑"></a>踩的一些小坑</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Connection conn = ....;</span><br><span class="line">String sql = <span class="string">&quot;select count(*) from stu_grade where ? &gt;= ?&quot;</span>;</span><br><span class="line">PreparedStatement ps = conn.PreparedStatement(sql);</span><br><span class="line">ps.setObject(<span class="number">1</span>, <span class="string">&quot;Object&quot;</span>);</span><br><span class="line">ps.setObject(<span class="number">2</span>, <span class="number">110</span>);</span><br><span class="line"></span><br><span class="line">ResultSet rs = ps.executeQuery();</span><br><span class="line">rs.getObject(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
 
@@ -271,6 +271,21 @@
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/11/03/SpingMVC%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">SpingMVC编码问题</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
