@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Hexo Theme Keep">
     <meta name="description" content="Hexo Theme Keep">
-    <meta name="author" content="WuCheng">
+    <meta name="author" content="Wucheng">
     
     <title>
         
@@ -14,15 +14,29 @@
     
 <link rel="stylesheet" href="/css/style.css">
 
-    <link rel="shortcut icon" href="/images/avatar.png">
     
-<link rel="stylesheet" href="/css/font-awesome.min.css">
+        <link rel="shortcut icon" href="/images/avatar.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-    <script id="hexo-configurations">
-    let KEEP = window.KEEP || {};
-    KEEP.hexo_config = {"hostname":"blog.wucheng.work","root":"/","language":"zh-CN"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/avatar.png","favicon":"/images/avatar.png","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":true,"background_img":"/images/bg.png","description":"怀念过去，珍惜眼前，着手未来"},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":false,"preload":false},"code_copy":{"enable":true,"style":"mac"},"pjax":{"enable":false},"lazyload":{"enable":true},"version":"3.4.3"};
-    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"blog.wucheng.work","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"戊成的BLOG","author":"Wucheng","avatar":"http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640","logo":"http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640","favicon":"/images/avatar.png"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                  || fa-solid fa-tags","categories":"/categories      || fa-solid fa-layer-group","links":"/links                || fa-solid fa-link","about":"/about                || fa-solid fa-user"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"怀念过去，珍惜现在，着手未来。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/Furry-wucheng","weixin":null,"qq":"2538000780","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":"ture","tag":"ture","post_datetime":"ture"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":"菜鸡"},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":"ture","share":"ture","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{"links":[{"name":"炎忍的博客","link":"https://blog.imyan.ren/","description":"心之所愿，无所不成。","avatar":"https://blog.imyan.ren/media/avatar.png"},{"name":"Kroxitine-克罗西丁/Epors-伊普尔斯","link":"https://epors.cn","description":"你知道吗，我有一把非常棒的锤子！","avatar":"http://q1.qlogo.cn/g?b=qq&nk=2657124519&s=640"},{"name":"Pi(品品)","link":"https://b.dopi.cc/","description":"这个人非常的懒，非常非常的懒","avatar":"http://q1.qlogo.cn/g?b=qq&nk=910083634&s=640"},{"name":"Wainbaro(肖究佟)","link":"https://wainbaro.github.io/","description":"“画画使我快乐。”","avatar":"http://q1.qlogo.cn/g?b=qq&nk=1411878525&s=640"},{"name":"扶摇 Skyrocketing","link":"https://skyrocketing.ninja/","description":"凡事豫则立，不豫则废","avatar":"https://skyrocketing.ninja/img/icon.png"},{"name":"Gking(ZhanXiaoSong)","link":"https://www.gking.icu/","description":"自己来选择，不会后悔的道路","avatar":"https://www.gking.icu/img/avatar.png"}]},"version":"4.2.3"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -35,83 +49,109 @@
 </div>
 
 
-<main class="page-container">
 
+<main class="page-container border-box">
+    <!-- home first screen  -->
     
 
-    <div class="page-main-content">
-
+    <!-- page content -->
+    <div class="page-main-content border-box is-home">
         <div class="page-main-content-top">
-            <header class="header-wrapper">
-
-    <div class="header-content">
-        <div class="left">
             
-                <a class="logo-image" href="/">
-                    <img src="/images/avatar.png">
+<header class="header-wrapper transparent-1">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640">
                 </a>
             
-            <a class="logo-title" href="/">
-                戊成的BLOG
+            <a class="site-name border-box" href="/">
+               戊成的BLOG
             </a>
         </div>
 
-        <div class="right">
-            <div class="pc">
-                <ul class="menu-list">
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
                     
-                        <li class="menu-item">
-                            <a class="active"
-                               href="/"
-                            >
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
                                 首页
+                                
                             </a>
+                            
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
                                 归档
+                                
                             </a>
+                            
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                分类
-                            </a>
-                        </li>
-                    
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
                                 标签
+                                
                             </a>
+                            
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/links"
-                            >
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
                                 友链
+                                
                             </a>
+                            
                         </li>
                     
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user"></i>
+                                
                                 关于
+                                
                             </a>
+                            
                         </li>
                     
                     
                 </ul>
             </div>
-            <div class="mobile">
+            <div class="mobile border-box flex-start">
                 
                 <div class="icon-item menu-bar">
                     <div class="menu-bar-middle"></div>
@@ -121,36 +161,102 @@
     </div>
 
     <div class="header-drawer">
-        <ul class="drawer-menu-list">
+        <ul class="drawer-menu-list border-box">
             
-                <li class="drawer-menu-item flex-center">
-                    <a class="active"
-                       href="/">首页</a>
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives">归档</a>
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories">分类</a>
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags">标签</a>
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/links">友链</a>
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about">关于</a>
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
                 </li>
             
         </ul>
@@ -163,349 +269,341 @@
 
         </div>
 
-        <div class="page-main-content-middle">
+        <div class="page-main-content-middle border-box">
 
-            <div class="main-content">
-
+            <div class="main-content border-box">
                 
+
                     <div class="home-content-container fade-in-down-animation">
-    <ul class="home-article-list">
+    
+    <ul class="home-post-list border-box">
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <h3 class="home-article-title">
-                    <a href="/2021/12/12/HTML%E4%BD%9C%E4%B8%9A/">
-                        HTML作业
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
+                <div class="home-post-item-bottom border-box">
                     
-                        HTML课程的期末作业
-要求
+                    <h3 class="home-post-title border-box">
+                        <a href="/2022/09/27/%E7%AE%80%E6%98%93%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%89%88%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2-0/">
+                            简易控制台版学生管理系统2.0
+                        </a>
+                    </h3>
 
-制作首页（index.html）
-制作详情页（detail.html）
-制作注册页（register.html）
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            经典作业-学生管理系统但是 JDBC
+                        
+                    </div>
 
-页面整体为上中下布局页面中间又分为左右布局使用DIV来布局网页结构，整体页面布局使用标准文档流布局局部...
                     
-                </div>
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Dec 12 2021 13:32:43 GMT+0800">2021-12-12</span></span>
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
-            <span class="home-article-category"><i class="fas fa-folder"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a>&nbsp;
-                        </li>
-                    
-                    
-                </ul>
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Sat Nov 30 2024 17:03:17 GMT+0800"
+                >2024-11-30 17:03:17</span>
             </span>
         
+
         
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
+
+        
+
+        
+
+        
+        
+        
         
     </div>
 
-    <a href="/2021/12/12/HTML%E4%BD%9C%E4%B8%9A/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    
+        <a class="home-read-more" href="/2022/09/27/%E7%AE%80%E6%98%93%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%89%88%E5%AD%A6%E7%94%9F%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F2-0/">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
 </div>
 
+                </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <h3 class="home-article-title">
-                    <a href="/2021/11/28/Hexo-GitHub-CDN/">
-                        Hexo+Github 七牛云
-                    </a>
-                </h3>
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/2022/05/31/FTP%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+                            FTP服务器
+                        </a>
+                    </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        想要加速不需要那么麻烦啦（22.5.18）首先感谢一波推荐，加速GitHub page现在只需要到[Cloudflare](Cloudflare Status)这个网站
-首先注册账号然后绑定好GitHub
-点击侧边栏的Page然后点击创建项目旁边的一...
-                    
-                </div>
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>记录一下搭建FTP服务器踩过的坑</p>
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Nov 28 2021 19:55:15 GMT+0800">2021-11-28</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
                     
-                        <li>
-                            
-                            <a href="/tags/hexo/">hexo</a>&nbsp;
-                        </li>
-                    
-                </ul>
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Sat Nov 30 2024 17:15:52 GMT+0800"
+                >2024-11-30 17:15:52</span>
             </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
         
     </div>
 
-    <a href="/2021/11/28/Hexo-GitHub-CDN/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    
+        <a class="home-read-more" href="/2022/05/31/FTP%E6%9C%8D%E5%8A%A1%E5%99%A8/">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
 </div>
 
+                </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <h3 class="home-article-title">
-                    <a href="/2021/11/21/C%E8%AF%AD%E8%A8%80%E4%BD%9C%E4%B8%9A-%E4%BA%8C/">
-                        C语言作业(二)
-                    </a>
-                </h3>
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/2022/05/17/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+                            Java多线程笔记
+                        </a>
+                    </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        作业
-阶乘表12345678910111213141516171819#include &lt;stdio.h&gt;int main(void)&#123;    int factorial = 1;    printf(&quot;n \t n的...
-                    
-                </div>
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            Java的多线程的学习笔记
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sun Nov 21 2021 11:23:01 GMT+0800">2021-11-21</span></span>
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E7%BB%83%E4%B9%A0/">练习</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/C/">C</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a>&nbsp;
-                        </li>
-                    
-                </ul>
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Sat Nov 30 2024 17:15:52 GMT+0800"
+                >2024-11-30 17:15:52</span>
             </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
         
     </div>
 
-    <a href="/2021/11/21/C%E8%AF%AD%E8%A8%80%E4%BD%9C%E4%B8%9A-%E4%BA%8C/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    
+        <a class="home-read-more" href="/2022/05/17/Java%E5%A4%9A%E7%BA%BF%E7%A8%8B/">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
 </div>
 
+                </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <h3 class="home-article-title">
-                    <a href="/2021/11/20/C%E8%AF%AD%E8%A8%80%E4%BD%9C%E4%B8%9A/">
-                        C语言作业（一）
-                    </a>
-                </h3>
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/2022/03/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88C%E8%AF%AD%E8%A8%80%EF%BC%89/">
+                            数据结构（C语言）
+                        </a>
+                    </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        放一点最近老师最近布置的作业
-2&#x2F;1+3&#x2F;2+5&#x2F;3+……n的前30项和12345678910111213141516#include &lt;stdio.h&gt;int main(void)&#123;    dou...
-                    
-                </div>
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            总算搞懂数据结构长啥样了
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Sat Nov 20 2021 19:47:55 GMT+0800">2021-11-20</span></span>
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
         
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/%E7%BB%83%E4%B9%A0/">练习</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/C/">C</a>&nbsp;
-                        </li>
-                    
-                        <li>
-                            | 
-                            <a href="/tags/%E4%BD%9C%E4%B8%9A/">作业</a>&nbsp;
-                        </li>
-                    
-                </ul>
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Sat Nov 30 2024 17:08:33 GMT+0800"
+                >2024-11-30 17:08:33</span>
             </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
         
     </div>
 
-    <a href="/2021/11/20/C%E8%AF%AD%E8%A8%80%E4%BD%9C%E4%B8%9A/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    
+        <a class="home-read-more" href="/2022/03/24/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%88C%E8%AF%AD%E8%A8%80%EF%BC%89/">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
 </div>
 
+                </div>
             </li>
         
-            <li class="home-article-item">
+            <li class="home-post-item">
 
                 
 
-                <h3 class="home-article-title">
-                    <a href="/2021/11/19/hexo%E9%83%A8%E7%BD%B2plus/">
-                        Hexo部署plus
-                    </a>
-                </h3>
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/2022/03/17/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">
+                            经典排序算法
+                        </a>
+                    </h3>
 
-                <div class="home-article-content markdown-body">
-                    
-                        写在前面前面的完成了基本的hexo的搭建，但是要自己的博客更实用/好看一点仅仅前边所说的是不够的，因此在这里加了一点拓展。ps：由于人比较懒，不会一次性写完，现留着坑慢慢写
-Hexo的主题那么，有了一个博客，当然好看的皮肤主题是不能少的，所以我们要去...
-                    
-                </div>
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            全部都是自己手写的！
+                        
+                    </div>
 
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Fri Nov 19 2021 20:30:54 GMT+0800">2021-11-19</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
                     
-                        <li>
-                            
-                            <a href="/tags/hexo/">hexo</a>&nbsp;
-                        </li>
-                    
-                </ul>
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Sat Nov 30 2024 17:03:17 GMT+0800"
+                >2024-11-30 17:03:17</span>
             </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
         
     </div>
 
-    <a href="/2021/11/19/hexo%E9%83%A8%E7%BD%B2plus/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
+    
+        <a class="home-read-more" href="/2022/03/17/%E7%BB%8F%E5%85%B8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
 </div>
 
-            </li>
-        
-            <li class="home-article-item">
-
-                
-
-                <h3 class="home-article-title">
-                    <a href="/2021/10/20/hexo%E9%83%A8%E7%BD%B2/">
-                        Hexo的部署
-                    </a>
-                </h3>
-
-                <div class="home-article-content markdown-body">
-                    
-                        Hexo的安装准备（在此之前请先安装node.js和git）  
-首先要注册好一个GitHub账号，然后新建一个仓库，起一个名字（最好是你的用户名）然后安装好git后在要存放blog的文件夹中右击，选择Git Bash Here然后将你的GitHub...
-                    
                 </div>
-
-                <div class="home-article-meta-info-container">
-    <div class="home-article-meta-info">
-        <span><i class="fas fa-history"></i>&nbsp;<span class="home-article-date" data-date="Wed Oct 20 2021 16:39:29 GMT+0800">2021-10-20</span></span>
-        
-        
-            <span class="home-article-tag">
-                <i class="fas fa-tags"></i>&nbsp;
-                <ul>
-                    
-                        <li>
-                            
-                            <a href="/tags/hexo/">hexo</a>&nbsp;
-                        </li>
-                    
-                </ul>
-            </span>
-        
-    </div>
-
-    <a href="/2021/10/20/hexo%E9%83%A8%E7%BD%B2/">阅读全文&nbsp;<i class="fas fa-angle-right"></i></a>
-</div>
-
             </li>
         
     </ul>
-
-    <div class="home-paginator">
-        <div class="paginator">
     
-        <a class="prev btn"
-           href="/page/2/"
-        >上一页</a>
-    
+    <div class="paginator border-box flex-center">
+        <div class="border-box first-page paginator-btn allowed">
+            <a class="border-box"><i class="fa-solid fa-angle-double-left"></i></a>
+        </div>
 
-    
-</div>
+        <div class="border-box paginator-btn allowed">
+            <a class="border-box"
+               href="/page/2/"
+            ><i class="fa-solid fa-chevron-left"></i></a>
+        </div>
 
+
+        <div class="page-number-box border-box flex-center">
+            <input class="page-number-input border-box base-style"
+                   type="number"
+                   value="3"
+                   min="1"
+                   max="5"
+            /><span class="delimiter base-style">/</span><span class="base-style">5</span>
+        </div>
+
+
+        <div class="border-box paginator-btn allowed">
+            <a class="border-box"
+               href="/page/4/"
+            ><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+
+        <div class="border-box last-page paginator-btn allowed">
+            <a class="border-box"><i class="fa-solid fa-angle-double-right"></i></a>
+        </div>
     </div>
+
+
+
+
 </div>
 
 
                 
             </div>
-
         </div>
 
-        <div class="page-main-content-bottom">
-            <footer class="footer">
-    <div class="info-container">
-        <div class="copyright-info info-item">
-            &copy;
+        <div class="page-main-content-bottom border-box">
             
-              <span>2021</span>
-              -
-            
-            2024&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">WuCheng</a>
-        </div>
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+        &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
         
-        <div class="theme-info info-item">
-            由 <a target="_blank" href="https://hexo.io">Hexo</a> 驱动&nbsp;|&nbsp;主题&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v3.4.3</a>
-        </div>
-        
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Wucheng</a>
         
     </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
 </footer>
 
         </div>
     </div>
 
+    <!-- post tools -->
     
 
-    <div class="right-bottom-side-tools">
-        <div class="side-tools-container">
-    <ul class="side-tools-list">
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box side-tools-show-handle">
+    <ul class="side-tools-list side-tools-show-handle border-box">
         <li class="tools-item tool-font-adjust-plus flex-center">
             <i class="fas fa-search-plus"></i>
         </li>
@@ -514,81 +612,109 @@ Hexo的主题那么，有了一个博客，当然好看的皮肤主题是不能�
             <i class="fas fa-search-minus"></i>
         </li>
 
-        <li class="tools-item tool-expand-width flex-center">
-            <i class="fas fa-arrows-alt-h"></i>
-        </li>
-
-        <li class="tools-item tool-dark-light-toggle flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
 
         <!-- rss -->
         
 
-        
-            <li class="tools-item tool-scroll-to-top flex-center">
-                <i class="fas fa-arrow-up"></i>
-            </li>
-        
-
+        <!-- to bottom -->
         <li class="tools-item tool-scroll-to-bottom flex-center">
             <i class="fas fa-arrow-down"></i>
         </li>
     </ul>
 
-    <ul class="exposed-tools-list">
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
         <li class="tools-item tool-toggle-show flex-center">
             <i class="fas fa-cog fa-spin"></i>
         </li>
-        
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
     </ul>
 </div>
 
     </div>
 
-    
-
-    <div class="image-viewer-container">
-    <img src="">
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
 </div>
 
 
+    <!-- local search -->
     
 
+    <!-- tablet toc -->
+    
 </main>
 
 
 
 
 
-<script src="/js/utils.js"></script>
 
-<script src="/js/main.js"></script>
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
 
 <script src="/js/header-shrink.js"></script>
 
 <script src="/js/back2top.js"></script>
 
-<script src="/js/dark-light-toggle.js"></script>
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
 
 
+<!-- local search -->
 
 
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+        
+<script src="/js/page/home-page.js"></script>
 
     
-<script src="/js/code-copy.js"></script>
 
-
-
-
+    <!-- post page -->
     
-<script src="/js/lazyload.js"></script>
 
+    <!-- categories page -->
+    
 
+    <!-- links page -->
+    
 
-<div class="post-scripts">
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
 
 
 
