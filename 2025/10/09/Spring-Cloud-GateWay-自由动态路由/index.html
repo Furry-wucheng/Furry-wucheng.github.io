@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Wucheng">
+    
+    <title>
+        
+            Spring Cloud Gateway动态路由与全局过滤器排查 |
+        
+        戊成的BLOG
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/avatar.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"blog.wucheng.work","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"戊成的BLOG","author":"Wucheng","avatar":"http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640","logo":"http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640","favicon":"/images/avatar.png"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                  || fa-solid fa-tags","categories":"/categories      || fa-solid fa-layer-group","links":"/links                || fa-solid fa-link","about":"/about                || fa-solid fa-user"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"怀念过去，珍惜现在，着手未来。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/Furry-wucheng","weixin":null,"qq":"2538000780","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":"","category":true,"tag":true,"post_datetime":"create"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["菜鸡"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":"ture","share":"ture","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{"links":[{"title":"圈友们"},{"name":"Kroxitine-克罗西丁/Epors-伊普尔斯","link":"https://kroxitine.com/","description":"你知道吗，我有一把非常棒的锤子！","avatar":"http://q1.qlogo.cn/g?b=qq&nk=2657124519&s=640"},{"name":"炎忍","link":"https://imyan.ren/","description":"心之所愿，无所不成。","avatar":"https://blog.imyan.ren/media/avatar.png"},{"name":"扶摇 Skyrocketing","link":"https://fuyaorocket.ing/","description":"凡事豫则立，不豫则废","avatar":"https://fuyaorocket.ing/images/logo.png"},{"name":"Ctone","link":"https://onect.one/","description":"普普通通，勉勉强强算一名大学生（","avatar":"https://c.disquscdn.com/uploads/users/40625/5129/avatar92.jpg?1714050307"},{"title":"无法访问"},{"name":"Pi(品品)","link":"https://b.dopi.cc/","description":"这个人非常的懒，非常非常的懒","avatar":"http://q1.qlogo.cn/g?b=qq&nk=910083634&s=640"},{"name":"Gking(ZhanXiaoSong)","link":"https://www.gking.icu/","description":"自己来选择，不会后悔的道路","avatar":"https://www.gking.icu/img/avatar.png"},{"name":"Wainbaro(肖究佟)","link":"https://wainbaro.github.io/","description":"“画画使我快乐。”","avatar":"http://q1.qlogo.cn/g?b=qq&nk=1411878525&s=640"}]},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               戊成的BLOG
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Spring Cloud Gateway动态路由与全局过滤器排查
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Wucheng</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-10-09 17:54:05</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Oct 09 2025 18:30:26 GMT+0800">2025-10-09 18:30:26</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Spring/">Spring</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="Spring-Cloud-Gateway-动态路由与全局过滤器问题排查"><a href="#Spring-Cloud-Gateway-动态路由与全局过滤器问题排查" class="headerlink" title="Spring Cloud Gateway 动态路由与全局过滤器问题排查"></a>Spring Cloud Gateway 动态路由与全局过滤器问题排查</h1><hr>
+<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>在使用 Spring Cloud Gateway 构建 API 网关时，实现了两个核心 <code>GlobalFilter</code>：</p>
+<ol>
+<li>**<code>DynamicRouterFilter</code>**：根据请求头中的 <code>REAL_URL</code> 动态转发请求</li>
+<li>**<code>CustomGlobalFilter</code>**：实现鉴权、签名校验、限流、调用次数扣减及响应日志记录</li>
+</ol>
+<p>但在实际运行中遇到两个关键问题：</p>
+<ul>
+<li><strong>请求未正确转发到下游服务</strong></li>
+<li><strong>响应体日志未打印（<code>handleResponse</code> 未生效）</strong></li>
+</ul>
+<hr>
+<h2 id="原代码实现"><a href="#原代码实现" class="headerlink" title="原代码实现"></a>原代码实现</h2><h3 id="DynamicRouterFilter"><a href="#DynamicRouterFilter" class="headerlink" title="DynamicRouterFilter"></a>DynamicRouterFilter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicRouterFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span>, Ordered &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line">        <span class="type">ServerHttpRequest</span> <span class="variable">request</span> <span class="operator">=</span> exchange.getRequest();</span><br><span class="line">        <span class="type">HttpHeaders</span> <span class="variable">headers</span> <span class="operator">=</span> request.getHeaders();</span><br><span class="line">        <span class="comment">// 验证请求头</span></span><br><span class="line">        <span class="keyword">if</span> (!headers.containsKey(REAL_URL))&#123;</span><br><span class="line">            <span class="keyword">return</span> handleError(exchange.getResponse(), HttpStatus.BAD_REQUEST, <span class="string">&quot;无效的请求地址&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">realUrl</span> <span class="operator">=</span> headers.getFirst(REAL_URL);</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(realUrl))&#123;</span><br><span class="line">            <span class="keyword">return</span> handleError(exchange.getResponse(), HttpStatus.BAD_REQUEST, <span class="string">&quot;无效的请求地址&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">URI</span> <span class="variable">uri</span> <span class="operator">=</span> getUri(realUrl, request);</span><br><span class="line">            log.info(<span class="string">&quot;动态路由转发: &#123;&#125;&quot;</span>, uri);</span><br><span class="line">            <span class="comment">// 设置 GATEWAY_REQUEST_URL_ATTR 属性</span></span><br><span class="line">            exchange.getAttributes().put(ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR, uri);</span><br><span class="line">            <span class="type">ServerHttpRequest</span> <span class="variable">newRequest</span> <span class="operator">=</span> request.mutate()</span><br><span class="line">                    .uri(uri) <span class="comment">// 更改请求的URI</span></span><br><span class="line">                    .build();</span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange.mutate().request(newRequest).build());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (URISyntaxException e) &#123;</span><br><span class="line">            <span class="keyword">return</span> handleError(exchange.getResponse(), HttpStatus.BAD_REQUEST, <span class="string">&quot;无效的请求地址&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 重新拼接URL函数</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> URI <span class="title function_">getUri</span><span class="params">(String realUrl, ServerHttpRequest request)</span> <span class="keyword">throws</span> URISyntaxException &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="CustomGlobalFilter"><a href="#CustomGlobalFilter" class="headerlink" title="CustomGlobalFilter"></a>CustomGlobalFilter</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CustomGlobalFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span>, Ordered &#123;</span><br><span class="line">    <span class="comment">// 其他服务调用</span></span><br><span class="line">    ....</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> &#123;</span><br><span class="line">	<span class="comment">//打印请求日志</span></span><br><span class="line">	....</span><br><span class="line">        <span class="type">ServerHttpResponse</span> <span class="variable">response</span> <span class="operator">=</span> exchange.getResponse();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 其他业务逻辑</span></span><br><span class="line">	......</span><br><span class="line">        <span class="comment">// 当响应后进行日志记录</span></span><br><span class="line">        <span class="type">ServerHttpResponseDecorator</span> <span class="variable">decoratedResponse</span> <span class="operator">=</span> handleResponse(response);</span><br><span class="line">        <span class="keyword">return</span> chain.filter(exchange.mutate().response(decoratedResponse).build());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 错误响应函数</span></span><br><span class="line">    <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">handleError</span><span class="params">(ServerHttpResponse response, HttpStatus status, String message)</span> &#123;&#125;</span><br><span class="line">    <span class="keyword">private</span> Mono&lt;Void&gt; <span class="title function_">handleError</span><span class="params">(ServerHttpResponse response)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> handleError(response, HttpStatus.INTERNAL_SERVER_ERROR, <span class="string">&quot;服务器内部错误&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> ServerHttpResponseDecorator <span class="title function_">handleResponse</span><span class="params">(ServerHttpResponse response)</span> &#123;</span><br><span class="line">        <span class="type">ServerHttpResponseDecorator</span> <span class="variable">decoratedResponse</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ServerHttpResponseDecorator</span>(response) &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> Mono&lt;Void&gt; <span class="title function_">writeWith</span><span class="params">(Publisher&lt;? extends DataBuffer&gt; body)</span> &#123;</span><br><span class="line">                <span class="comment">// 这里才能获取到响应体数据</span></span><br><span class="line">                <span class="keyword">if</span> (body <span class="keyword">instanceof</span> Flux) &#123;</span><br><span class="line">                    Flux&lt;DataBuffer&gt; fluxBody = (Flux&lt;DataBuffer&gt;) body;</span><br><span class="line">                    <span class="keyword">return</span> DataBufferUtils.join(fluxBody)</span><br><span class="line">                            .flatMap(dataBuffer -&gt; &#123;</span><br><span class="line">                                <span class="keyword">try</span> &#123;</span><br><span class="line">                                    <span class="comment">// 拼接响应体</span></span><br><span class="line">                                    <span class="type">byte</span>[] content = <span class="keyword">new</span> <span class="title class_">byte</span>[dataBuffer.readableByteCount()];</span><br><span class="line">                                    dataBuffer.read(content);</span><br><span class="line">                                    <span class="type">String</span> <span class="variable">responseBody</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>(content, StandardCharsets.UTF_8);</span><br><span class="line">                                    <span class="comment">// 日志打印</span></span><br><span class="line">				    ....</span><br><span class="line">                                    <span class="comment">// 重新包装响应体</span></span><br><span class="line">                                    <span class="type">DataBuffer</span> <span class="variable">newBuffer</span> <span class="operator">=</span> response.bufferFactory().wrap(content);</span><br><span class="line">                                    DataBufferUtils.release(dataBuffer);</span><br><span class="line"></span><br><span class="line">                                    <span class="keyword">return</span> <span class="built_in">super</span>.writeWith(Mono.just(newBuffer));</span><br><span class="line">                                &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                                    log.error(<span class="string">&quot;处理响应体时出错&quot;</span>, e);</span><br><span class="line">                                    <span class="keyword">return</span> handleError(response);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;)</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">super</span>.writeWith(body);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">return</span> decoratedResponse;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h2 id="问题一：请求未转发到下游服务"><a href="#问题一：请求未转发到下游服务" class="headerlink" title="问题一：请求未转发到下游服务"></a>问题一：请求未转发到下游服务</h2><h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><ul>
+<li>网关日志显示 <code>DynamicRouterFilter</code> 成功设置了目标 URI（如 <code>http://localhost:8123/api/name/user</code>）</li>
+<li>但下游目标服务未收到请求</li>
+<li>网关最终返回 <code>200</code> 或 <code>404</code>，且 <code>routeUri=no://op</code></li>
+</ul>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>Spring Cloud Gateway 内置的 <strong><code>RouteToRequestUrlFilter</code><strong>（order &#x3D; 10000）在 <code>DynamicRouterFilter</code> 之后执行，并</strong>覆盖了</strong>我们手动设置的 <code>GATEWAY_REQUEST_URL_ATTR</code></p>
+<blockquote>
+<p>即使设置了正确的 URI，<code>RouteToRequestUrlFilter</code> 仍会根据 route 配置中的 <code>uri: no://op</code> 重新生成无效 URL</p>
+</blockquote>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p><strong>确保 <code>DynamicRouterFilter</code> 在 <code>RouteToRequestUrlFilter</code> 之后执行</strong>，从而覆盖其结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicRouterFilter</span> <span class="keyword">implements</span> <span class="title class_">GlobalFilter</span>, Ordered &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">20000</span>; <span class="comment">// 必须 &gt; 10000 (RouteToRequestUrlFilter 的 order)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时，确保 route 配置存在（即使 uri 是占位符）：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">cloud:</span></span><br><span class="line">    <span class="attr">gateway:</span></span><br><span class="line">      <span class="attr">routes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">id:</span> <span class="string">dynamic-route</span></span><br><span class="line">          <span class="attr">uri:</span> <span class="string">http://placeholder</span>  <span class="comment"># 合法 URI，避免解析异常</span></span><br><span class="line">          <span class="attr">predicates:</span></span><br><span class="line">            <span class="bullet">-</span> <span class="string">Path=/**</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="问题二：响应日志未打印"><a href="#问题二：响应日志未打印" class="headerlink" title="问题二：响应日志未打印"></a>问题二：响应日志未打印</h2><h3 id="现象-1"><a href="#现象-1" class="headerlink" title="现象"></a>现象</h3><ul>
+<li><code>CustomGlobalFilter.handleResponse()</code> 中的 <code>log.info(&quot;响应体: ...&quot;)</code> 未执行</li>
+</ul>
+<h3 id="根本原因"><a href="#根本原因" class="headerlink" title="根本原因"></a>根本原因</h3><h4 id="1-响应装饰器未生效"><a href="#1-响应装饰器未生效" class="headerlink" title="1. 响应装饰器未生效"></a>1. <strong>响应装饰器未生效</strong></h4><p><code>NettyWriteResponseFilter</code>（order &#x3D; -1）在 <code>CustomGlobalFilter</code>（order &#x3D; 0）<strong>之前</strong>执行，提前锁定了响应流，在之后包装的 <code>ServerHttpResponseDecorator</code> 被忽略</p>
+<hr>
+<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="1-调整-Filter-执行顺序"><a href="#1-调整-Filter-执行顺序" class="headerlink" title="1. 调整 Filter 执行顺序"></a>1. 调整 Filter 执行顺序</h4><p>让 <code>CustomGlobalFilter</code> 在 <code>NettyWriteResponseFilter</code> 之前执行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getOrder</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">2</span>; <span class="comment">// 必须 &lt; -1 (NettyWriteResponseFilter 的 order)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Spring/">Spring</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2025/06/06/RabbitMQ%E5%AD%A6%E4%B9%A0/"
+                                   title="RabbitMQ学习"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">RabbitMQ学习</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Gateway-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%85%A8%E5%B1%80%E8%BF%87%E6%BB%A4%E5%99%A8%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-text">Spring Cloud Gateway 动态路由与全局过滤器问题排查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">原代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DynamicRouterFilter"><span class="nav-text">DynamicRouterFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CustomGlobalFilter"><span class="nav-text">CustomGlobalFilter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E8%AF%B7%E6%B1%82%E6%9C%AA%E8%BD%AC%E5%8F%91%E5%88%B0%E4%B8%8B%E6%B8%B8%E6%9C%8D%E5%8A%A1"><span class="nav-text">问题一：请求未转发到下游服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E5%93%8D%E5%BA%94%E6%97%A5%E5%BF%97%E6%9C%AA%E6%89%93%E5%8D%B0"><span class="nav-text">问题二：响应日志未打印</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1-1"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0"><span class="nav-text">根本原因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%93%8D%E5%BA%94%E8%A3%85%E9%A5%B0%E5%99%A8%E6%9C%AA%E7%94%9F%E6%95%88"><span class="nav-text">1. 响应装饰器未生效</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%B0%83%E6%95%B4-Filter-%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">1. 调整 Filter 执行顺序</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Wucheng</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Gateway-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1%E4%B8%8E%E5%85%A8%E5%B1%80%E8%BF%87%E6%BB%A4%E5%99%A8%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5"><span class="nav-text">Spring Cloud Gateway 动态路由与全局过滤器问题排查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%9F%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-text">原代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DynamicRouterFilter"><span class="nav-text">DynamicRouterFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CustomGlobalFilter"><span class="nav-text">CustomGlobalFilter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E8%AF%B7%E6%B1%82%E6%9C%AA%E8%BD%AC%E5%8F%91%E5%88%B0%E4%B8%8B%E6%B8%B8%E6%9C%8D%E5%8A%A1"><span class="nav-text">问题一：请求未转发到下游服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0"><span class="nav-text">原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E5%93%8D%E5%BA%94%E6%97%A5%E5%BF%97%E6%9C%AA%E6%89%93%E5%8D%B0"><span class="nav-text">问题二：响应日志未打印</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1-1"><span class="nav-text">现象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0"><span class="nav-text">根本原因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%93%8D%E5%BA%94%E8%A3%85%E9%A5%B0%E5%99%A8%E6%9C%AA%E7%94%9F%E6%95%88"><span class="nav-text">1. 响应装饰器未生效</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E8%B0%83%E6%95%B4-Filter-%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">1. 调整 Filter 执行顺序</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

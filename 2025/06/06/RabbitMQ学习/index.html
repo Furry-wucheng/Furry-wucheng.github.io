@@ -317,7 +317,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Tue Jun 10 2025 19:57:11 GMT+0800">2025-06-10 19:57:11</span>
+                    <span class="datetime" data-updated="Thu Oct 09 2025 17:59:20 GMT+0800">2025-10-09 17:59:20</span>
                 </span>
             
         
@@ -365,7 +365,7 @@
                     
 
                     
-                         <h1 id="RabbitMQ-消息队列"><a href="#RabbitMQ-消息队列" class="headerlink" title="RabbitMQ 消息队列"></a>RabbitMQ 消息队列</h1><p>首先使用的时候需要创建好一个新的账户和 Virtual Hosts（并绑定到这个账户），这个是用来隔离其他可能需要用到的业务的</p>
+                         <h1 id="RabbitMQ-消息队列基础"><a href="#RabbitMQ-消息队列基础" class="headerlink" title="RabbitMQ 消息队列基础"></a>RabbitMQ 消息队列基础</h1><p>首先使用的时候需要创建好一个新的账户和 Virtual Hosts（并绑定到这个账户），这个是用来隔离其他可能需要用到的业务的</p>
 <p>使用初始账号密码登录后在 <code>Admin</code>这个选项中新建用户，切换到新建的账户，然后点击右侧边栏的 <code>Virtual Hosts</code>自拟名字创建虚拟路由</p>
 <p>需要新建队列在 <code>Queue and Streams</code>中，选择队列绑定到想要的虚拟路由中即可</p>
 <h2 id="Java-客户端"><a href="#Java-客户端" class="headerlink" title="Java 客户端"></a>Java 客户端</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--AMQP依赖，包含RabbitMQ--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -438,6 +438,22 @@
                 
                     <div class="post-nav border-box">
                         
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2025/10/09/Spring-Cloud-GateWay-%E8%87%AA%E7%94%B1%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1/"
+                                   title="Spring Cloud Gateway动态路由与全局过滤器排查"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Spring Cloud Gateway动态路由与全局过滤器排查</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
                         
                             <div class="next-post">
                                 <a class="next"
@@ -474,7 +490,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">RabbitMQ 消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">Java 客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-text">消费者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Work-%E6%A8%A1%E5%9E%8B"><span class="nav-text">Work 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fanout%EF%BC%88%E5%B9%BF%E6%92%AD%EF%BC%89"><span class="nav-text">Fanout（广播）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct%EF%BC%88%E5%AE%9A%E5%90%91%EF%BC%89"><span class="nav-text">Direct（定向）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic%EF%BC%88%E8%AF%9D%E9%A2%98%EF%BC%89"><span class="nav-text">Topic（话题）</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80"><span class="nav-text">RabbitMQ 消息队列基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">Java 客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-text">消费者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Work-%E6%A8%A1%E5%9E%8B"><span class="nav-text">Work 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fanout%EF%BC%88%E5%B9%BF%E6%92%AD%EF%BC%89"><span class="nav-text">Fanout（广播）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct%EF%BC%88%E5%AE%9A%E5%90%91%EF%BC%89"><span class="nav-text">Direct（定向）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic%EF%BC%88%E8%AF%9D%E9%A2%98%EF%BC%89"><span class="nav-text">Topic（话题）</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 
@@ -605,7 +621,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">RabbitMQ 消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">Java 客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-text">消费者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Work-%E6%A8%A1%E5%9E%8B"><span class="nav-text">Work 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fanout%EF%BC%88%E5%B9%BF%E6%92%AD%EF%BC%89"><span class="nav-text">Fanout（广播）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct%EF%BC%88%E5%AE%9A%E5%90%91%EF%BC%89"><span class="nav-text">Direct（定向）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic%EF%BC%88%E8%AF%9D%E9%A2%98%EF%BC%89"><span class="nav-text">Topic（话题）</span></a></li></ol></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E5%9F%BA%E7%A1%80"><span class="nav-text">RabbitMQ 消息队列基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">Java 客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E4%BA%A7%E8%80%85"><span class="nav-text">生产者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E8%B4%B9%E8%80%85"><span class="nav-text">消费者</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Work-%E6%A8%A1%E5%9E%8B"><span class="nav-text">Work 模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fanout%EF%BC%88%E5%B9%BF%E6%92%AD%EF%BC%89"><span class="nav-text">Fanout（广播）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Direct%EF%BC%88%E5%AE%9A%E5%90%91%EF%BC%89"><span class="nav-text">Direct（定向）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Topic%EF%BC%88%E8%AF%9D%E9%A2%98%EF%BC%89"><span class="nav-text">Topic（话题）</span></a></li></ol></li></ol></li></ol>
     </div>
 </div>
 

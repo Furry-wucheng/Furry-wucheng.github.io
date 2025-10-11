@@ -317,7 +317,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Sat Nov 30 2024 17:08:33 GMT+0800">2024-11-30 17:08:33</span>
+                    <span class="datetime" data-updated="Tue Jun 10 2025 21:20:16 GMT+0800">2025-06-10 21:20:16</span>
                 </span>
             
         
@@ -396,6 +396,11 @@
 
 <p>根据需要修改完配置后，然后就可以运行命令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">-p 6379:6379 \</span><br><span class="line">--name redis \</span><br><span class="line">-v /home/docker/redis/conf/redis.conf:/etc/redis/redis.conf \</span><br><span class="line">-v /home/docker/redis/data:/data \</span><br><span class="line">-d redis redis-server /etc/redis/redis.conf \</span><br><span class="line">--appendonly yes</span><br></pre></td></tr></table></figure>
+
+<h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><p>官方提供了命令，可以直接查看<a class="link"   target="_blank" rel="noopener" href="https://www.rabbitmq.com/docs/download" >官网<i class="fas fa-external-link-alt"></i></a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># latest RabbitMQ 4.x</span><br><span class="line">docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4-management</span><br></pre></td></tr></table></figure>
+
+<p>5672 提供给客户端，15672 为网页控制台</p>
 
                     
                 </div>
@@ -480,7 +485,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL"><span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redies"><span class="nav-text">Redies</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL"><span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redies"><span class="nav-text">Redies</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ"><span class="nav-text">RabbitMQ</span></a></li></ol>
     </div>
 </div>
 
@@ -611,7 +616,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL"><span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redies"><span class="nav-text">Redies</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MySQL"><span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Redies"><span class="nav-text">Redies</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RabbitMQ"><span class="nav-text">RabbitMQ</span></a></li></ol>
     </div>
 </div>
 
