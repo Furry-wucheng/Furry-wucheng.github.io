@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Wucheng">
+    
+    <title>
+        
+            基于Spring Websocket STOMP协议在线聊天核心功能的实现 |
+        
+        戊成的BLOG
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/avatar.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"blog.wucheng.work","root":"/","language":"zh-CN"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"戊成的BLOG","author":"Wucheng","avatar":"http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640","logo":"http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640","favicon":"/images/avatar.png"},"menu":{"home":"/                        || fa-solid fa-home","archives":"/archives            || fa-solid fa-box-archive","tags":"/tags                  || fa-solid fa-tags","categories":"/categories      || fa-solid fa-layer-group","links":"/links                || fa-solid fa-link","about":"/about                || fa-solid fa-user"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"怀念过去，珍惜现在，着手未来。","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/Furry-wucheng","weixin":null,"qq":"2538000780","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":"","category":true,"tag":true,"post_datetime":"create"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["菜鸡"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":"ture","share":"ture","reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":false,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":false,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":false,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":false,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{"links":[{"title":"圈友们"},{"name":"Kroxitine-克罗西丁/Epors-伊普尔斯","link":"https://kroxitine.com/","description":"你知道吗，我有一把非常棒的锤子！","avatar":"http://q1.qlogo.cn/g?b=qq&nk=2657124519&s=640"},{"name":"炎忍","link":"https://imyan.ren/","description":"心之所愿，无所不成。","avatar":"https://blog.imyan.ren/media/avatar.png"},{"name":"扶摇 Skyrocketing","link":"https://fuyaorocket.ing/","description":"凡事豫则立，不豫则废","avatar":"https://fuyaorocket.ing/images/logo.png"},{"name":"Ctone","link":"https://onect.one/","description":"普普通通，勉勉强强算一名大学生（","avatar":"https://c.disquscdn.com/uploads/users/40625/5129/avatar92.jpg?1714050307"},{"title":"无法访问"},{"name":"Pi(品品)","link":"https://b.dopi.cc/","description":"这个人非常的懒，非常非常的懒","avatar":"http://q1.qlogo.cn/g?b=qq&nk=910083634&s=640"},{"name":"Gking(ZhanXiaoSong)","link":"https://www.gking.icu/","description":"自己来选择，不会后悔的道路","avatar":"https://www.gking.icu/img/avatar.png"},{"name":"Wainbaro(肖究佟)","link":"https://wainbaro.github.io/","description":"“画画使我快乐。”","avatar":"http://q1.qlogo.cn/g?b=qq&nk=1411878525&s=640"}]},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               戊成的BLOG
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                分类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                友链
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            分类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            友链
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        基于Spring Websocket STOMP协议在线聊天核心功能的实现
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="http://q1.qlogo.cn/g?b=qq&nk=3241748701&s=640">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Wucheng</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2025-03-21 19:12:21</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Sun Oct 12 2025 00:16:09 GMT+0800">2025-10-12 00:16:09</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">后端开发</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Java/">Java</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Spring/">Spring</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>接了高中同学朋友的一个毕设单子，帮他修复问题（他Vue Router的路由守卫没有检查，一直无限重定向了），然后顺便再开发一个心理咨询项目的在线聊天咨询的功能。</p>
+<p>本来考虑直接使用Websocket，但是调研后发现基于Websocket的STOMP协议似乎更容易实现功能，由此记录一下聊天功能的实现。</p>
+<p>由于是毕设简单演示，消息的存储并未放在任何数据库中（其实只是懒），仅使用localstore进行临时存储。由于是单子项目并未上传到任何仓库中。</p>
+<h1 id="STOMP协议"><a href="#STOMP协议" class="headerlink" title="STOMP协议"></a>STOMP协议</h1><p>STOMP (Simple Text Oriented Messaging Protocol) 是一个简单的面向文本的消息传递协议。它提供了一个可互操作的连接格式，允许STOMP客户端与任意STOMP消息代理进行交互（从不知道哪抄的）。</p>
+<p>STOMP理解下来大概就是<strong>消息订阅发布</strong>，大致流程就是</p>
+<ol>
+<li>客户端首先根据自己的id订阅了自己的消息（频道）</li>
+<li>消息发送方消息发送消息到服务器，里面携带了接收方的id</li>
+<li>服务器接收消息后，根据收到的接收方id找到该频道投送消息</li>
+<li>接收方发现自己订阅的频道有消息进行接收</li>
+</ol>
+<h2 id="STOMP命令类型："><a href="#STOMP命令类型：" class="headerlink" title="STOMP命令类型："></a>STOMP命令类型：</h2><ul>
+<li><code>CONNECT</code>：建立连接</li>
+<li><code>SEND</code>：发送消息</li>
+<li><code>SUBSCRIBE</code>：订阅消息</li>
+<li><code>DISCONNECT</code>：断开连接</li>
+</ul>
+<h1 id="项目实现"><a href="#项目实现" class="headerlink" title="项目实现"></a>项目实现</h1><h2 id="核心配置-WebsocketConfig"><a href="#核心配置-WebsocketConfig" class="headerlink" title="核心配置 - WebsocketConfig"></a>核心配置 - WebsocketConfig</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSocketMessageBroker</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">WebsocketConfig</span> <span class="keyword">implements</span> <span class="title class_">WebSocketMessageBrokerConfigurer</span> &#123;</span><br><span class="line">    <span class="comment">// 注册STOMP端点</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">registerStompEndpoints</span><span class="params">(StompEndpointRegistry registry)</span> &#123;</span><br><span class="line">        registry.addEndpoint(<span class="string">&quot;/ws&quot;</span>).setAllowedOrigins(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置消息代理</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">configureMessageBroker</span><span class="params">(MessageBrokerRegistry registry)</span> &#123;</span><br><span class="line">        registry.setApplicationDestinationPrefixes(<span class="string">&quot;/app&quot;</span>)</span><br><span class="line">                .setUserDestinationPrefix(<span class="string">&quot;/user&quot;</span>)</span><br><span class="line">                .enableSimpleBroker(<span class="string">&quot;/topic&quot;</span>, <span class="string">&quot;/queue&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加拦截器（下文中）</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">configureClientInboundChannel</span><span class="params">(ChannelRegistration registration)</span> &#123;</span><br><span class="line"></span><br><span class="line">        registration.interceptors(authChannelInterceptor);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置说明：</strong></p>
+<ul>
+<li><code>/ws</code>：WebSocket连接端点</li>
+<li><code>/app</code>：应用程序目的地前缀，用于路由到@MessageMapping方法</li>
+<li><code>/user</code>：用户目的地前缀，用于点对点消息</li>
+<li><code>/topic</code>：用于广播消息</li>
+<li><code>/queue</code>：用于点对点消息</li>
+</ul>
+<h2 id="身份认证拦截器-AuthChannelInterceptor"><a href="#身份认证拦截器-AuthChannelInterceptor" class="headerlink" title="身份认证拦截器 - AuthChannelInterceptor"></a>身份认证拦截器 - AuthChannelInterceptor</h2><p>该拦截器实现了完整的用户身份验证和在线状态管理：</p>
+<p>拦截器需要继承ChannelInterceptor，然后在配置类中进行注册即可使用</p>
+<h3 id="连接认证流程："><a href="#连接认证流程：" class="headerlink" title="连接认证流程："></a>连接认证流程：</h3><ol>
+<li><strong>Token验证</strong>：从请求头中获取Authorization token</li>
+<li><strong>Redis验证</strong>：检查token在Redis中是否存在</li>
+<li><strong>JWT解析</strong>：解析token获取用户信息</li>
+<li><strong>设置Principal</strong>：为WebSocket会话设置用户身份</li>
+<li><strong>在线状态管理</strong>：将用户添加到Redis集合中</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AuthChannelInterceptor</span> <span class="keyword">implements</span> <span class="title class_">ChannelInterceptor</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Message&lt;?&gt; preSend(Message&lt;?&gt; message, MessageChannel channel) &#123;</span><br><span class="line">        <span class="type">StompHeaderAccessor</span> <span class="variable">accessor</span> <span class="operator">=</span> MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);</span><br><span class="line">	<span class="comment">// 对于非CONNECT命令，放行请求</span></span><br><span class="line">        <span class="keyword">if</span> (accessor != <span class="literal">null</span> &amp;&amp; StompCommand.CONNECT.equals(accessor.getCommand())) &#123;</span><br><span class="line">	    <span class="comment">// 获取token</span></span><br><span class="line">            List&lt;String&gt; authorization = accessor.getNativeHeader(<span class="string">&quot;Authorization&quot;</span>);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">// 验证Redis中是否存在token</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">redisToken</span> <span class="operator">=</span> operations.get(token);</span><br><span class="line">                <span class="keyword">if</span> (redisToken == <span class="literal">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">null</span>; <span class="comment">// token无效</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="comment">// 解析token获取用户信息</span></span><br><span class="line">                Map&lt;String, Object&gt; userInfo = JwtUtil.parseToken(redisToken);</span><br><span class="line">                <span class="comment">// 设置用户Principal</span></span><br><span class="line">                <span class="type">Principal</span> <span class="variable">principal</span> <span class="operator">=</span> () -&gt; userInfo.get(<span class="string">&quot;id&quot;</span>)+<span class="string">&quot;_&quot;</span> + userInfo.get(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">                accessor.setUser(principal);</span><br><span class="line">                <span class="comment">// 存储用户信息到ThreadLocal，便于后续处理</span></span><br><span class="line">                ThreadLocalUtil.set(userInfo);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// 将用户添加到 Redis 集合</span></span><br><span class="line">                <span class="type">String</span> <span class="variable">role</span> <span class="operator">=</span> String.valueOf(userInfo.get(<span class="string">&quot;role&quot;</span>));</span><br><span class="line">                <span class="type">String</span> <span class="variable">userId</span> <span class="operator">=</span> String.valueOf(userInfo.get(<span class="string">&quot;id&quot;</span>));</span><br><span class="line">                <span class="type">Object</span> <span class="variable">username</span> <span class="operator">=</span> userInfo.get(<span class="string">&quot;username&quot;</span>);</span><br><span class="line">		<span class="comment">// 将信息放入redis，以便后续获取在线列表</span></span><br><span class="line">                template.opsForSet().add(<span class="string">&quot;身份&quot;</span>, userId+<span class="string">&quot;_&quot;</span> + username);</span><br><span class="line">                <span class="keyword">return</span> message;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>; <span class="comment">// 认证失败，返回null</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> message;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 下面还有断开连接的逻辑</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="断开连接处理："><a href="#断开连接处理：" class="headerlink" title="断开连接处理："></a>断开连接处理：</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterSendCompletion</span><span class="params">(Message&lt;?&gt; message, MessageChannel channel, <span class="type">boolean</span> sent, Exception ex)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (accessor != <span class="literal">null</span> &amp;&amp; StompCommand.DISCONNECT.equals(accessor.getCommand())) &#123;</span><br><span class="line">        <span class="comment">// 清除ThreadLocal</span></span><br><span class="line">        ThreadLocalUtil.remove();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 从Redis集合中移除用户状态</span></span><br><span class="line">        template.opsForSet().remove(<span class="string">&quot;student&quot;</span>, userId+<span class="string">&quot;_&quot;</span> + username);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="消息收发机制"><a href="#消息收发机制" class="headerlink" title="消息收发机制"></a>消息收发机制</h2><h3 id="消息数据结构"><a href="#消息数据结构" class="headerlink" title="消息数据结构"></a>消息数据结构</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ChatMessage</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer from;           <span class="comment">// 发送者ID</span></span><br><span class="line">    <span class="keyword">private</span> String fromName;        <span class="comment">// 发送者用户名</span></span><br><span class="line">    <span class="keyword">private</span> String to;              <span class="comment">// 接收者ID</span></span><br><span class="line">    <span class="keyword">private</span> String content;         <span class="comment">// 消息内容</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime sendTime; <span class="comment">// 发送时间</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息发送-ChatMessageHandler"><a href="#消息发送-ChatMessageHandler" class="headerlink" title="消息发送 - ChatMessageHandler"></a>消息发送 - ChatMessageHandler</h3><p>核心发送方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@MessageMapping(&quot;/chat.send&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">handleChatMessage</span><span class="params">(Principal principal, <span class="meta">@Payload</span> ChatMessage message)</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 从Principal获取发送者信息</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">fromInfo</span> <span class="operator">=</span> principal.getName(); <span class="comment">// 格式：userId_username</span></span><br><span class="line">    String[] split = fromInfo.split(<span class="string">&quot;_&quot;</span>);</span><br><span class="line">    message.setFrom(Integer.parseInt(split[<span class="number">0</span>]));</span><br><span class="line">    message.setFromName(split[<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 设置发送时间</span></span><br><span class="line">    message.setSendTime(LocalDateTime.now());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3. 发送点对点消息</span></span><br><span class="line">    messagingTemplate.convertAndSendToUser(</span><br><span class="line">        message.getTo(),        <span class="comment">// 接收者ID</span></span><br><span class="line">        <span class="string">&quot;/queue/messages&quot;</span>,      <span class="comment">// 目的地</span></span><br><span class="line">        message                 <span class="comment">// 消息内容</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="消息接收"><a href="#消息接收" class="headerlink" title="消息接收"></a>消息接收</h3><p>客户端需要订阅以下地址来接收消息：</p>
+<ul>
+<li><strong>个人消息队列</strong>：<code>/user/queue/messages</code></li>
+<li><strong>广播消息</strong>：<code>/topic/broadcast</code></li>
+</ul>
+<p>前端首先需要导入</p>
+<blockquote>
+<p>pnpm install @stomp&#x2F;stompjs ws</p>
+</blockquote>
+<p>先创建一个配置客户端配置的函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">客户端创建函数</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">createStompClient</span>(<span class="params">options = &#123;&#125;</span>) &#123;</span><br><span class="line">  <span class="comment">// 获取token</span></span><br><span class="line">  <span class="keyword">const</span> token = <span class="variable language_">localStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;token&#x27;</span>) || <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="comment">// 创建STOMP客户端</span></span><br><span class="line">  <span class="keyword">const</span> client = <span class="keyword">new</span> <span class="title class_">Client</span>(&#123;</span><br><span class="line">    <span class="comment">// STOMP服务端点</span></span><br><span class="line">    <span class="attr">brokerURL</span>: <span class="string">&#x27;ws://localhost:8080/ws&#x27;</span>,</span><br><span class="line">    <span class="comment">// 添加token到连接头信息</span></span><br><span class="line">    <span class="attr">connectHeaders</span>: &#123;</span><br><span class="line">      <span class="title class_">Authorization</span>: token</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 自动重连设置</span></span><br><span class="line">    <span class="attr">reconnectDelay</span>: <span class="number">5000</span>,</span><br><span class="line">    <span class="attr">heartbeatIncoming</span>: <span class="number">4000</span>,</span><br><span class="line">    <span class="attr">heartbeatOutgoing</span>: <span class="number">4000</span>,</span><br><span class="line">    <span class="comment">// STOMP连接回调</span></span><br><span class="line">    <span class="attr">onConnect</span>: options.<span class="property">onConnect</span> || (<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;STOMP连接成功&#x27;</span>)),</span><br><span class="line">    <span class="comment">// 断开连接回调</span></span><br><span class="line">    <span class="attr">onDisconnect</span>: options.<span class="property">onDisconnect</span> || (<span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;STOMP连接已断开&#x27;</span>)),</span><br><span class="line">    <span class="comment">// 连接错误回调</span></span><br><span class="line">    <span class="attr">onWebSocketError</span>: options.<span class="property">onError</span> || (<span class="function">(<span class="params">error</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;WebSocket 连接错误:&#x27;</span>, error)),</span><br><span class="line">    <span class="comment">// STOMP错误处理</span></span><br><span class="line">    <span class="attr">onStompError</span>: options.<span class="property">onStompError</span> || (<span class="function">(<span class="params">frame</span>) =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;STOMP 错误:&#x27;</span>, frame)),</span><br><span class="line">    <span class="comment">// 调试日志设置</span></span><br><span class="line">    <span class="attr">debug</span>: <span class="function">(<span class="params">msg</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">debug</span>(msg)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> client</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后找个地方放STOMP客户端，我直接放在store里面配合其他函数方便使用消息收发了</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立STOMP连接</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">connectStomp</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 如果已经有连接，先断开</span></span><br><span class="line">  <span class="keyword">if</span> (stompClient) &#123;</span><br><span class="line">    <span class="title function_">disconnectStomp</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 创建STOMP客户端</span></span><br><span class="line">    stompClient = <span class="title function_">createStompClient</span>(&#123;</span><br><span class="line">      <span class="comment">// 这里是以上函数的回调函数</span></span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 激活连接</span></span><br><span class="line">    stompClient.<span class="title function_">activate</span>();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;创建STOMP连接失败:&quot;</span>, error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 断开STOMP连接</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">disconnectStomp</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (stompClient &amp;&amp; isConnected.<span class="property">value</span>) &#123;</span><br><span class="line">    stompClient.<span class="title function_">deactivate</span>();</span><br><span class="line">    stompClient = <span class="literal">null</span>;</span><br><span class="line">    isConnected = <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>消息收发函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 订阅自己的消息</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">subscribeToMessages</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (stompClient &amp;&amp; isConnected.<span class="property">value</span>) &#123;</span><br><span class="line">    stompClient.<span class="title function_">subscribe</span>(<span class="string">&quot;/user/queue/messages&quot;</span>, <span class="function">(<span class="params">message</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> msg = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(message.<span class="property">body</span>);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;收到消息:&quot;</span>, msg);</span><br><span class="line">      <span class="title function_">handleReceiveMessage</span>(msg);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sendMessage</span> = (<span class="params">message</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span>(isConnected.<span class="property">value</span>)&#123;</span><br><span class="line">    <span class="comment">// 发送消息到服务器</span></span><br><span class="line">    stompClient.<span class="title function_">publish</span>(&#123;</span><br><span class="line">      <span class="attr">destination</span>: <span class="string">&quot;/app/chat.send&quot;</span>,</span><br><span class="line">      <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(message),</span><br><span class="line">      <span class="attr">headers</span>: &#123;</span><br><span class="line">        <span class="string">&quot;content-type&quot;</span>: <span class="string">&quot;application/json&quot;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在线用户通知"><a href="#在线用户通知" class="headerlink" title="在线用户通知"></a>在线用户通知</h2><p>由于是配合Redis，所以如果需要获取在线咨询师列表的话，我们可以直接从Redis客户端即取。</p>
+<p>比如在载入页面的时候调用后端接口，直接展示出咨询师的列表。由于使用的是消息订阅发布模型。</p>
+<p>对于后续有新咨询师上线，可以在上线后直接通过广播 <code>/topic</code>直接进行发布消息，客户端也只需要进行订阅然后进行更新本地聊天列表即可。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Java/">Java</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Spring/">Spring</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2025/06/06/RabbitMQ%E5%AD%A6%E4%B9%A0/"
+                                   title="RabbitMQ学习"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">RabbitMQ学习</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/10/12/%E6%B3%A8%E8%A7%A3%E5%92%8CAOP%E7%9A%84%E7%AE%80%E5%8D%95%E6%9D%83%E9%99%90%E8%AE%A4%E8%AF%81/"
+                                   title="注解和AOP的简单权限认证"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">注解和AOP的简单权限认证</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#STOMP%E5%8D%8F%E8%AE%AE"><span class="nav-text">STOMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STOMP%E5%91%BD%E4%BB%A4%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-text">STOMP命令类型：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0"><span class="nav-text">项目实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE-WebsocketConfig"><span class="nav-text">核心配置 - WebsocketConfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%8B%A6%E6%88%AA%E5%99%A8-AuthChannelInterceptor"><span class="nav-text">身份认证拦截器 - AuthChannelInterceptor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-text">连接认证流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5%E5%A4%84%E7%90%86%EF%BC%9A"><span class="nav-text">断开连接处理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%94%B6%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="nav-text">消息收发机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">消息数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81-ChatMessageHandler"><span class="nav-text">消息发送 - ChatMessageHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%8E%A5%E6%94%B6"><span class="nav-text">消息接收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E9%80%9A%E7%9F%A5"><span class="nav-text">在线用户通知</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Wucheng</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+            <li class="tools-item tool-toggle-theme-mode flex-center">
+                <i class="fas fa-moon"></i>
+            </li>
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#STOMP%E5%8D%8F%E8%AE%AE"><span class="nav-text">STOMP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#STOMP%E5%91%BD%E4%BB%A4%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-text">STOMP命令类型：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%AE%9E%E7%8E%B0"><span class="nav-text">项目实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE-WebsocketConfig"><span class="nav-text">核心配置 - WebsocketConfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81%E6%8B%A6%E6%88%AA%E5%99%A8-AuthChannelInterceptor"><span class="nav-text">身份认证拦截器 - AuthChannelInterceptor</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E8%AE%A4%E8%AF%81%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-text">连接认证流程：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E5%BC%80%E8%BF%9E%E6%8E%A5%E5%A4%84%E7%90%86%EF%BC%9A"><span class="nav-text">断开连接处理：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%94%B6%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="nav-text">消息收发机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">消息数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E5%8F%91%E9%80%81-ChatMessageHandler"><span class="nav-text">消息发送 - ChatMessageHandler</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%88%E6%81%AF%E6%8E%A5%E6%94%B6"><span class="nav-text">消息接收</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E7%94%A8%E6%88%B7%E9%80%9A%E7%9F%A5"><span class="nav-text">在线用户通知</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
