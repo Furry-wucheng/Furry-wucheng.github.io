@@ -317,7 +317,7 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Tue Jun 10 2025 21:20:16 GMT+0800">2025-06-10 21:20:16</span>
+                    <span class="datetime" data-updated="Mon Jan 19 2026 15:41:50 GMT+0800">2026-01-19 15:41:50</span>
                 </span>
             
         
@@ -366,8 +366,6 @@
 
                     
                          <p>网上创建容器的命令有点点小问题，为避免以后到处找命令，所以写一个备忘录记一下</p>
-<span id="more"></span>
-
 <h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql \</span><br><span class="line">-v /home/docker/mysql/log:/var/log/mysql \</span><br><span class="line">-v /home/docker/mysql/data:/var/lib/mysql \</span><br><span class="line">-v /mydata/mysql/conf:/etc/mysql/ \</span><br><span class="line">-p 3306:3306 \</span><br><span class="line">-e MYSQL_ROOT_PASSWORD=123456 \</span><br><span class="line">-d mysql:latest \</span><br><span class="line">--init-connect=&quot;SET collation_connection=utf8mb4_0900_ai_ci&quot; \</span><br><span class="line">--init-connect=&quot;SET NAMES utf8mb4&quot; \</span><br><span class="line">--default-authentication-plugin=mysql_native_password</span><br><span class="line">--skip-character-set-client-handshake</span><br></pre></td></tr></table></figure>
 
 <p>当然也可以写好配置文件后，使用配置文件方式进行启动</p>
@@ -503,7 +501,7 @@
             
 <footer class="footer border-box">
     <div class="copyright-info info-item">
-    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2025
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
     
             &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Wucheng</a>
         
